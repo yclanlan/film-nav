@@ -13,7 +13,7 @@ export default function BrowseView({
     handleTouchMove,
     handleTouchEnd,
 
-    carouseRef,
+    carouselRef,
     getCardStyle,
 }) {
     return (
@@ -25,6 +25,7 @@ export default function BrowseView({
             initial={{ opacity: 0 }}
             animate={{ 
               opacity: 1,
+            //   filter: selectedId ? "blur(4px)" : "blur(0px)",
               scale: selectedId ? 0.95 : 1
             }}
             transition={{ duration: 0.4 }}
@@ -32,7 +33,7 @@ export default function BrowseView({
 
          {/* wrapper for touch/mouse swipe */}
             <div
-            ref={carouseRef}
+            ref={carouselRef}
             className="relative w-full h-124 perspective-1000 flex items-center justify-center overflow-hidden m-auto pb-16"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
