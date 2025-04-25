@@ -1,10 +1,12 @@
-import Image from "next/image";
+
+import MovieCarousel from "./components/MovieCarousel";
 
 export default function Home() {
   return (
     <>
-    <h1> font test</h1>
     
+    <MovieCarousel />
+
     </>
   );
 }
