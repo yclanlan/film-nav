@@ -1,7 +1,7 @@
 ### Movie Browsing App
  A responsive React application that allows users to browse through movies in an interactive 3D carousel, with swipe gestures to like or dislike movies in a movie festival to get a list of the movies you want to see.
 
- [Link to Project]
+ [Link to Project](https://film-nav.netlify.app/)
 
 -----
 
@@ -33,4 +33,4 @@
 - Use the bottom tab bar to switch between Browse, Liked, and Disliked movie views
 - View and manage your movie preferences in the respective tabs
 
-<img src="">
+(/public/IMG-4319.HEIC)
