@@ -1,20 +1,41 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import BrowseMovieCard from "./BrowseMovieCard"
+import MovieDetail from "./MovieDetail";
 
 export default function BrowseView({
     movies,
     selectedId,
     centerIndex,
-    selectedMovie,
-
     handleCardClick,
+    selectedMovie,
+    handleBack,
+    swipeDirection,
+    detailSwipeOffset,
+
+    handleDetailTouchStart,
+    handleDetailTouchMove,
+    handleDetailTouchEnd,
+
+    handleDetailMouseDown,  
+    handleDetailMouseMove,
+    handleDetailMouseUp,
+
+    getDetailSwipeStyle,
 
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
 
-    carouselRef,
+    handleMouseDown,  
+    handleMouseMove,
+    handleMouseUp,
+
     getCardStyle,
+    likedMovies,
+    dislikedMovies,
+    carouselRef,
+    festivalTime
+
 }) {
     return (
 
@@ -55,6 +76,41 @@ export default function BrowseView({
             </div>
 
             </motion.div>
+
+
+            {selectedId && (
+            <motion.div 
+                className="fixed inset-0 z-50 flex items-top justify-center p-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={(e) => {
+                  if (e.target === e.currentTarget) {
+                    handleBack();
+                  }
+                }}
+              >
+                <MovieDetail 
+                  key={selectedMovie.id} 
+                  movie={selectedMovie} 
+                  swipeDirection={swipeDirection}
+    
+                  handleDetailTouchStart={handleDetailTouchStart}
+                  handleDetailTouchMove={handleDetailTouchMove}
+                  handleDetailTouchEnd={handleDetailTouchEnd}
+
+                  handleDetailMouseDown={handleDetailMouseDown}  
+                  handleDetailMouseMove={handleDetailMouseMove}
+                  handleDetailMouseUp={handleDetailMouseUp}
+
+                  swipeProps={getDetailSwipeStyle()}
+                />
+
+                </motion.div>
+            )}
+
+
+
         </div>
 
     )

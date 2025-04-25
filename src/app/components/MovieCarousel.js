@@ -21,6 +21,7 @@ import{ useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { movies } from "./data";
 import BrowseView from "./BrowseView";
+import { handleDetailTouchStart, handleDetailTouchMove,handleDetailTouchEnd,handleDetailMouseDown,handleDetailMouseMove,handleDetailMouseUp } from "./DetailPageSwipe";
 
 export default function MovieCarousel() {
 
@@ -131,7 +132,7 @@ export default function MovieCarousel() {
     }
 
 
-const getDetailSwipeStyle = () => {
+    const getDetailSwipeStyle = () => {
     const rotation = detailSwipeOffset / 10; // Convert offset to rotation angle
     const opacity = 1 - Math.min(0.5, Math.abs(detailSwipeOffset) / 300);
     
@@ -167,12 +168,13 @@ return(
         </motion.div>
 
         {/* Browse View */}
-        
+        {activeTab === 'browse' && (
         <BrowseView
         movies={movies}
         selectedId={selectedId}
         centerIndex={centerIndex}
         selectedMovie={selectedMovie}
+
         handleBack={handleBack}
         getCardStyle={getCardStyle}
 
@@ -181,8 +183,21 @@ return(
         handleTouchMove={handleTouchMove}
         handleTouchEnd={handleTouchEnd}
 
+        swipeDirection={swipeDirection}
+
+        getDetailSwipeStyle={getDetailSwipeStyle}
+
+        handleDetailTouchStart={handleDetailTouchStart}
+        handleDetailTouchMove={handleDetailTouchMove}
+        handleDetailTouchEnd={handleDetailTouchEnd}
+
+        handleDetailMouseDown={handleDetailMouseDown}  
+        handleDetailMouseMove= {handleDetailMouseMove}
+        handleDetailMouseUp={handleDetailMouseUp}
+
         carouselRef={carouselRef}
         />
+    )}
        
 
 
