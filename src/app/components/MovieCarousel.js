@@ -17,11 +17,14 @@
 
 'use client';
 import { motion, AnimatePresence } from "framer-motion";
+import { movies } from "./data";
+import BrowseView from "./BrowseView";
+
 export default function MovieCarousel() {
 
 return(
     // wrapper
-    <div className="w-full flex max-w-4xl text-center items-center justify-center">
+    <div className="w-full flex flex-col max-w-4xl text-center items-center justify-center">
 
         {/* logo bar */} 
         {/* FIXED CONTENT: so no need to wrap by AnimatePresence  */}
@@ -36,6 +39,13 @@ return(
             </div>
 
         </motion.div>
+
+        {/* Browse View */}
+        <AnimatePresence>
+            <BrowseView
+            movies={movies} />
+        </AnimatePresence>
+
        
     </div>
 )
