@@ -28,12 +28,6 @@ return (
   
     // Detail Card
     <div className="m-auto">
-    <div className="">
-
-
-
-    </div>
-
     <div className={`w-full -mt-4 items-center justify-center flex `}>
 
     {/* DetailCard - Body */}
