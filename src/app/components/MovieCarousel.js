@@ -16,15 +16,43 @@
 // -> 2 Lists (states) (like / dislike)
 
 'use client';
+import{ useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { movies } from "./data";
 import BrowseView from "./BrowseView";
 
 export default function MovieCarousel() {
 
+    //State for the default/current movie index
+    const [selectedId, setSelectedId]=useState(null);
+    const [centerIndex, setCenterIndex] = useState(5);
+
+    const carouseRef = useRef(null);
+
+    //card position
+    const getCardStyle = (index) => {
+        const diff = index - centerIndex;
+
+        //Arc
+        const radius = 200; // Radius of the arc
+        const angleStep = 15; // Angle step in degrees
+        const angle = diff * angleStep; // Calculate the angle for the current card
+        const angleRad=(angle * Math.PI) / 180; // Convert angle to radians
+
+        return {
+
+            x: xOffset,
+            y: yOffset,
+            z: zOffset,
+            rotateY: angle,
+
+            zIndex:10-Math.abs(diff), // Adjust zIndex based on the difference from the center index
+        }
+    }
+
 return(
     // wrapper
-    <div className="w-full flex flex-col max-w-4xl text-center items-center justify-center">
+    <div className="w-full h-dvh flex flex-col max-w-4xl text-center items-center justify-between">
 
         {/* logo bar */} 
         {/* FIXED CONTENT: so no need to wrap by AnimatePresence  */}
@@ -41,9 +69,12 @@ return(
         </motion.div>
 
         {/* Browse View */}
+        
         <AnimatePresence>
             <BrowseView
-            movies={movies} />
+            movies={movies}
+            getCardStyle={getCardStyle} 
+            carouseRef={carouseRef}/>
         </AnimatePresence>
 
        
