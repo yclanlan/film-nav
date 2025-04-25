@@ -21,6 +21,9 @@ import{ useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { movies } from "./data";
 import BrowseView from "./BrowseView";
+import LikedMovieView from "./LikedMovieView";
+import DislikedMovieView from "./DislikedMovieView";
+
 import { handleDetailTouchStart, handleDetailTouchMove,handleDetailTouchEnd,handleDetailMouseDown,handleDetailMouseMove,handleDetailMouseUp } from "./DetailPageSwipe";
 
 export default function MovieCarousel() {
@@ -40,7 +43,7 @@ export default function MovieCarousel() {
     const [activeTab, setActiveTab] = useState('browse'); // browse, liked, disliked
     const carouselRef = useRef(null);
     
-    //card position
+    //carousel card position
     const getCardStyle = (index) => {
         const diff = index - centerIndex;
 
@@ -131,7 +134,74 @@ export default function MovieCarousel() {
 
     }
 
+    // Touch/swipe handlers for detail view
+    const handleDetailTouchStart = (e) => {
+        if (e.touches) {
+        setStartX(e.touches[0].clientX);
+        } else {
+        setStartX(e.clientX);
+        }
+        setSwipeDirection('start');
+    };
 
+    const handleDetailTouchMove = (e) => {
+        if (startX === null) return;
+        
+        const currentX = e.touches ? e.touches[0].clientX : e.clientX;
+        const diff = currentX - startX;
+        
+        setDetailSwipeOffset(diff);
+        setSwipeDirection(diff > 0 ? 'right' : 'left');
+    };
+
+    const handleDetailTouchEnd = () => {
+        if (startX === null) return;
+        
+        const threshold = 100; // Threshold to determine if swipe should trigger action
+        
+        if (detailSwipeOffset > threshold) {
+        // Swiped right - like
+        const selectedMovie = movies.find(m => m.id === selectedId);
+        handleLikeDislike(selectedMovie, true);
+        } else if (detailSwipeOffset < -threshold) {
+        // Swiped left - dislike
+        const selectedMovie = movies.find(m => m.id === selectedId);
+        handleLikeDislike(selectedMovie, false);
+        } else {
+        // Reset if not swiped far enough
+        setDetailSwipeOffset(0);
+        setSwipeDirection(null);
+        }
+        
+        setStartX(null);
+    };
+
+
+
+    // Mouse handlers for detail view
+    const handleDetailMouseDown = (e) => {
+        handleDetailTouchStart(e);
+        
+        // Add mouse move and up listeners
+        document.addEventListener('mousemove', handleDetailMouseMove);
+        document.addEventListener('mouseup', handleDetailMouseUp);
+    };
+
+    const handleDetailMouseMove = (e) => {
+        handleDetailTouchMove(e);
+    };
+
+    const handleDetailMouseUp = () => {
+        handleDetailTouchEnd();
+        
+        // Remove mouse move and up listeners
+        document.removeEventListener('mousemove', handleDetailMouseMove);
+        document.removeEventListener('mouseup', handleDetailMouseUp);
+
+        setStartX(null);
+    };
+
+    // swipe style for the detail card
     const getDetailSwipeStyle = () => {
     const rotation = detailSwipeOffset / 10; // Convert offset to rotation angle
     const opacity = 1 - Math.min(0.5, Math.abs(detailSwipeOffset) / 300);
@@ -142,6 +212,31 @@ export default function MovieCarousel() {
         opacity: opacity,
         transition: swipeDirection ? { duration: 0 } : { duration: 0.5 }
     };
+    };
+
+
+    // Handle movie like/dislike
+    const handleLikeDislike = (movie, isLike) => {
+        if (isLike) {
+        setLikedMovies(prev => {
+            if (!prev.some(m => m.id === movie.id)) {
+            return [...prev, movie];
+            }
+            return prev;
+        });
+        setDislikedMovies(prev => prev.filter(m => m.id !== movie.id));
+        } else {
+        setDislikedMovies(prev => {
+            if (!prev.some(m => m.id === movie.id)) {
+            return [...prev, movie];
+            }
+            return prev;
+        });
+        setLikedMovies(prev => prev.filter(m => m.id !== movie.id));
+        }
+        setSelectedId(null);
+        setSwipeDirection(null);
+        setDetailSwipeOffset(0);
     };
 
   const selectedMovie = selectedId ? movies.find(m => m.id === selectedId) : null;
@@ -166,6 +261,31 @@ return(
             </div>
 
         </motion.div>
+
+          {/* Background poster */}
+        <div className="fixed inset-0 -z-4 h-dvh">
+            <div className="absolute inset-0 bg-black bg-opacity-10" /> {/* Darkening overlay */}
+        
+            <AnimatePresence mode="wait">
+            <motion.div 
+            key={selectedId || centerIndex}
+            className="absolute inset-0"
+            initial={{ opacity: 0.1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0.1 }}
+            transition={{ duration: 0.2
+            }}
+            style={{
+                backgroundImage: `url(${selectedId 
+                ? movies.find(m => m.id === selectedId).poster 
+                : movies[centerIndex].poster})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                filter: 'blur(16px) brightness(0.4)',
+            }}
+            />
+        </AnimatePresence>
+        </div>
 
         {/* Browse View */}
         {activeTab === 'browse' && (
@@ -197,8 +317,28 @@ return(
 
         carouselRef={carouselRef}
         />
-    )}
-       
+        )}
+
+        {/* Liked Movies View */}
+        <AnimatePresence>
+        {activeTab === 'liked' && (
+                <LikedMovieView
+                likedMovies={likedMovies}
+                setLikedMovies={setLikedMovies} 
+                />
+            )}
+        </AnimatePresence>
+    
+        {/* Disliked Movies View */}
+        <AnimatePresence>
+        {activeTab === 'disliked' && (
+                <DislikedMovieView
+                dislikedMovies={dislikedMovies}
+                setDislikedMovies={setDislikedMovies} 
+                />
+        )}
+        </AnimatePresence>
+
 
 
 

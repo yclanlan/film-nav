@@ -106,7 +106,7 @@ export default function BrowseView({
                   swipeProps={getDetailSwipeStyle()}
                 />
 
-                </motion.div>
+            </motion.div>
             )}
 
 
