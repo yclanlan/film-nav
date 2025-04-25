@@ -27,6 +27,8 @@ export default function MovieCarousel() {
     //State for the default/current movie index
     const [selectedId, setSelectedId] = useState(null);
     const [centerIndex, setCenterIndex] = useState(2);
+    const [startX, setStartX] = useState(null);
+    const [isSwiping, setIsSwiping] = useState(false);
     const carouseRef = useRef(null);
     
     //card position
@@ -61,18 +63,64 @@ export default function MovieCarousel() {
     //handle card click
     const handleCardClick = (id,index) => {
         if(!isSwiping){
-            if (index === centerIndex) 
+            if (index === centerIndex) {
                 setSelectedId(id);
             }else{
                 setCenterIndex(index);
             }
         }
+    };
+
+    //handle swipe
+    const hanfleTouchStart = (e) => {
+        setStartX(e.touches[0].clientX);
+        setIsSwiping(false);
+    }
+
+    const handleTouchMove = (e) => {
+
+        if (startX === null) return;
+    
+        const currentX = e.touches[0].clientX;
+        const diff = startX - currentX;
+        
+        // If the user has moved their finger more than 10px, consider it a swipe
+        if (Math.abs(diff) > 10) {
+          setIsSwiping(true);
+        }
+    
+    }
+    
+    const handleTouchEnd = (e) => {
+
+        if (startX === null) return;
+    
+        const currentX = e.changedTouches[0].clientX;
+        const diff = startX - currentX;
+        
+        // If swipe distance is significant, change the card
+        if (Math.abs(diff) > 50) {
+          // Swipe left (next card)
+          if (diff > 0 && centerIndex < movies.length - 1) {
+            setCenterIndex(centerIndex + 1);
+          }
+          // Swipe right (previous card)
+          else if (diff < 0 && centerIndex > 0) {
+            setCenterIndex(centerIndex - 1);
+          }
+        }
+        
+        setStartX(null);
+
+    }
+
+  const selectedMovie = selectedId ? movies.find(m => m.id === selectedId) : null;
 
     
 
 return(
     // wrapper
-    <div className="w-full h-dvh flex flex-col max-w-4xl text-center items-center justify-between">
+    <div className=" relative w-full h-dvh py-4 px-0 flex flex-col content-evenly justify-between items-center">
 
         {/* logo bar */} 
         {/* FIXED CONTENT: so no need to wrap by AnimatePresence  */}
@@ -93,7 +141,16 @@ return(
         <BrowseView
         movies={movies}
         selectedId={selectedId}
+        centerIndex={centerIndex}
+        selectedMovie={selectedMovie}
+
         getCardStyle={getCardStyle}
+
+        handleCardClick={handleCardClick}
+        hanfleTouchStart={hanfleTouchStart}
+        handleTouchMove={handleTouchMove}
+        handleTouchEnd={handleTouchEnd}
+        
         carouseRef={carouseRef}
         />
        
