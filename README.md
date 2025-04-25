@@ -33,4 +33,4 @@
 - Use the bottom tab bar to switch between Browse, Liked, and Disliked movie views
 - View and manage your movie preferences in the respective tabs
 
-![sketch](/public/IMG-4319.HEIC)
+![sketch](/public/IMG_4319.HEIC)
