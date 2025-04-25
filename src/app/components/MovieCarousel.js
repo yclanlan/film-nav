@@ -129,20 +129,24 @@ export default function MovieCarousel() {
 
     //handle swipe
     const handleTouchStart = (e) => {
+        // console.log("e:", e," e.touches:", e.touches);
         setStartX(e.touches[0].clientX);
         setIsSwiping(false);
     }
 
     const handleTouchMove = (e) => {
-
+        
         if (startX === null) return;
-    
+        
         const currentX = e.touches[0].clientX;
         const diff = startX - currentX;
-        
+
+        // console.log( "Diff:", diff);
         // If the user has moved their finger more than 10px, consider it a swipe
         if (Math.abs(diff) > 10) {
+            
           setIsSwiping(true);
+
         }
     
     }
@@ -194,10 +198,12 @@ export default function MovieCarousel() {
     const handleDetailTouchEnd = () => {
         if (startX === null) return;
         
-        const threshold = 100; // Threshold to determine if swipe should trigger action
+        const threshold = 100; 
+        // Threshold to determine if swipe should trigger action
         
         if (detailSwipeOffset > threshold) {
         // Swiped right - like
+        // Find the selected movie in movies array based on it's selectedId
         const selectedMovie = movies.find(m => m.id === selectedId);
         handleLikeDislike(selectedMovie, true);
         } else if (detailSwipeOffset < -threshold) {
