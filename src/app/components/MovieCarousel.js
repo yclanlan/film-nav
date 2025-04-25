@@ -16,6 +16,7 @@
 // -> 2 Lists (states) (like / dislike)
 
 'use client';
+
 import{ useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { movies } from "./data";
@@ -24,11 +25,10 @@ import BrowseView from "./BrowseView";
 export default function MovieCarousel() {
 
     //State for the default/current movie index
-    const [selectedId, setSelectedId]=useState(null);
-    const [centerIndex, setCenterIndex] = useState(5);
-
+    const [selectedId, setSelectedId] = useState(null);
+    const [centerIndex, setCenterIndex] = useState(2);
     const carouseRef = useRef(null);
-
+    
     //card position
     const getCardStyle = (index) => {
         const diff = index - centerIndex;
@@ -39,16 +39,36 @@ export default function MovieCarousel() {
         const angle = diff * angleStep; // Calculate the angle for the current card
         const angleRad=(angle * Math.PI) / 180; // Convert angle to radians
 
+        // Calculate position on arc
+        const xOffset = Math.sin(angleRad) * radius;
+        const zOffset = (Math.cos(angleRad) * radius) - radius;
+        const yOffset = Math.abs(diff) * 20; 
+        const rotationY = angle;
+
         return {
 
             x: xOffset,
             y: yOffset,
             z: zOffset,
-            rotateY: angle,
+            rotateY: rotationY,
+            opacity: Math.max(0.7, 1 - Math.abs(diff) * 0.15),
 
-            zIndex:10-Math.abs(diff), // Adjust zIndex based on the difference from the center index
+            zIndex:10-Math.abs(diff), 
+            // Adjust zIndex based on the difference from the center index
         }
     }
+
+    //handle card click
+    const handleCardClick = (id,index) => {
+        if(!isSwiping){
+            if (index === centerIndex) 
+                setSelectedId(id);
+            }else{
+                setCenterIndex(index);
+            }
+        }
+
+    
 
 return(
     // wrapper
@@ -70,13 +90,13 @@ return(
 
         {/* Browse View */}
         
-        <AnimatePresence>
-            <BrowseView
-            movies={movies}
-            getCardStyle={getCardStyle} 
-            carouseRef={carouseRef}/>
-        </AnimatePresence>
-
+        <BrowseView
+        movies={movies}
+        selectedId={selectedId}
+        getCardStyle={getCardStyle}
+        carouseRef={carouseRef}
+        />
+       
        
     </div>
 )

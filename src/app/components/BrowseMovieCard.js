@@ -1,15 +1,26 @@
 import {motion, AnimatePresence} from "framer-motion";
 
 export default function BrowseMovieCard({
-     movie 
+     movie,
+     index,
+     getCardStyle,
     }) {
 
         return(
         <motion.div
         key={movie.id} 
-        className=" w-64 h-108 bg-gray-800 rounded-lg shadow-xl">
-            <div >
-                <img src={movie.poster} alt={movie.title} className="w-full h-auto object-cover" />
+        initial={getCardStyle(index)}
+        animate={getCardStyle(index)}
+        style={getCardStyle(index)}
+        transition={{ 
+            type: "spring", 
+            stiffness: 300, 
+            damping: 30,
+            duration: 0.5 
+      }}
+        >
+            <div className="w-full h-full overflow-hidden rounded-lg relative">
+                <img src={movie.poster} alt={movie.title} className="w-full h-full object-cover" />
                 
             </div>
 

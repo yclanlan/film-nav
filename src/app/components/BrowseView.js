@@ -2,7 +2,11 @@ import BrowseMovieCard from "./BrowseMovieCard"
 
 export default function BrowseView({
     movies,
-    carouseRef
+    selectedId,
+    centerIndex,
+    selectedMovie,
+    carouseRef,
+    getCardStyle,
 }) {
     return (
 
@@ -16,7 +20,9 @@ export default function BrowseView({
             {/* create a card for each movie in the movies array */}
             {movies.map((movie, index) => (
             <BrowseMovieCard 
+            key={movie.id}
             movie={movie}
+            getCardStyle={getCardStyle}
             />
             ))}
 
