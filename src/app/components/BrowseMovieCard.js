@@ -31,8 +31,8 @@ export default function BrowseMovieCard({
                 
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
                 <div className="flex flex-row justify-between items-center mb-2">
-                <p className="text-xl font-bold">{movie.title}</p>
-                <p className="text-sm">{movie.year}</p>
+                <p className="text-xl font-bold text-white">{movie.title}</p>
+                <p className="text-sm text-white">{movie.year}</p>
                  </div>
                 <p className="text-sm bg-blue-500 px-6 py-2 text-center">{movie.festivalTime} </p>
   
