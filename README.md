@@ -33,7 +33,7 @@
 - Use the bottom tab bar to switch between Browse, Liked, and Disliked movie views
 - View and manage your movie preferences in the respective tabs
 
-![sketch](/film-nav/public/IMG_4319.jpg)
-![sketch](/film-nav/public/screenshot-0425.png)
-![sketch](/film-nav/public/test-on-devices.gif)
-![sketch](/film-nav/public/testing in chrome.gif)
+![sketch](/public/IMG_4319.jpg)
+![sketch](/public/screenshot-0425.png)
+![sketch](/public/test-on-devices.gif)
+![sketch](/public/testing in chrome.gif)
