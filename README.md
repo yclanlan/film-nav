@@ -85,3 +85,5 @@ To clearify the concept in a grahpic way, which helps me to get a sense of which
 ![Testing on responsive app](/public/screenshot-0425.png)
 
 ![Test on chrome](/public/testing-in-chrome.gif)
+
+![Testing on my devices](/public/test-on-devices.gif)
