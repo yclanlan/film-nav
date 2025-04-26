@@ -14,18 +14,25 @@
 
 ### Features
 - **Interactive 3D Carousel**: 
+
 Browse movies in a visually appealing arc layout
 -  **Gesture Controls**:
+
  Swipe left/right to navigate through movies
 -  **Like/Dislike System**:
+
  Swipe on movie details to like or dislike movies
 -  **Organized Views**:
+
  Separate tabs for browsing, liked movies, and disliked movies
 -  **Responsive Design**:
+
  Works on both desktop and mobile devices
 -  **Animated Transitions**:
+
  Smooth animations powered by Framer Motion
 -  **Dynamic Backgrounds**:
+
  Background adapts to the currently selected movie
 
 -----
