@@ -199,7 +199,7 @@ return (
       
     </div>
 
-    <div className="w-full fixed bottom-[9dvh] m-auto flex flex-row justify-center"> 
+    <div className="w-full fixed bottom-[9dvh] m-auto flex flex-row justify-center text-white"> 
       <span className="text-3xl m-0 p-0 "> ⤺ </span> 
       <span className="mt-1.5">  &nbsp; swipe / left to dislike / right to like  &nbsp; </span>
       <span className="text-3xl "> ⤻ </span> 
