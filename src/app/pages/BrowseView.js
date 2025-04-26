@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import BrowseMovieCard from "./BrowseMovieCard"
-import MovieDetail from "./MovieDetail";
+import BrowseMovieCard from "../components/BrowseMovieCard"
+import MovieDetail from "../components/MovieDetail";
 
 export default function BrowseView({
     movies,

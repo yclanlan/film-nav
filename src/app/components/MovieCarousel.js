@@ -20,9 +20,9 @@
 import{ useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { movies } from "./data";
-import BrowseView from "./BrowseView";
-import LikedMovieView from "./LikedMovieView";
-import DislikedMovieView from "./DislikedMovieView";
+import BrowseView from "../pages/BrowseView";
+import LikedMovieView from "../pages/LikedMovieView";
+import DislikedMovieView from "../pages/DislikedMovieView";
 
 export default function MovieCarousel() {
 
