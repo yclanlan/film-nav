@@ -1,4 +1,4 @@
-### Movie Browsing App
+## Movie Browsing App
  A responsive React application that allows users to browse through movies in an interactive 3D carousel, with swipe gestures to like or dislike movies in a movie festival to get a list of the movies you want to see.
 
 
@@ -12,7 +12,7 @@
 
  -----
 
-### Features
+## Features
  **Interactive 3D Carousel**: 
 
 Browse movies in a visually appealing arc layout
@@ -48,7 +48,7 @@ Browse movies in a visually appealing arc layout
  Background adapts to the currently selected movie
 
 -----
-### How to Use
+## How to Use
 #### Browse View
 
 - Swipe left or right to navigate through the movie carousel
@@ -66,13 +66,13 @@ Browse movies in a visually appealing arc layout
 
 -----
 
-##### Progression Documentation
+## Progression Documentation
 
-**COMMENT**
+### **COMMENT**
 
 `//++ something like this` : explain helps from ai/ plugin!
 
-**SKETCH**
+### **SKETCH**
 
 ![sketch](/public/IMG_4319.jpg)
 
@@ -84,7 +84,7 @@ To clearify the concept in a grahpic way, which helps me to get a sense of which
 
 
 
-**TESTING**
+### **TESTING**
 
 ![Testing on responsive app](/public/screenshot-0425.png)
 
