@@ -34,3 +34,4 @@
 - View and manage your movie preferences in the respective tabs
 
 ![sketch](/public/IMG_4319.jpg)
+![sketch](/public/screenshot-0425.png)
