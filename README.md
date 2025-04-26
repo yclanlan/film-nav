@@ -8,13 +8,13 @@
  This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ### Features
-- Interactive 3D Carousel: Browse movies in a visually appealing arc layout
-- Gesture Controls: Swipe left/right to navigate through movies
-- Like/Dislike System: Swipe on movie details to like or dislike movies
-- Organized Views: Separate tabs for browsing, liked movies, and disliked movies
-- Responsive Design: Works on both desktop and mobile devices
-- Animated Transitions: Smooth animations powered by Framer Motion
-- Dynamic Backgrounds: Background adapts to the currently selected movie
+- ** Interactive 3D Carousel **: Browse movies in a visually appealing arc layout
+- ** Gesture Controls ** : Swipe left/right to navigate through movies
+-  ** Like/Dislike System ** : Swipe on movie details to like or dislike movies
+-  ** Organized Views ** : Separate tabs for browsing, liked movies, and disliked movies
+-  ** Responsive Design ** : Works on both desktop and mobile devices
+-  ** Animated Transitions ** : Smooth animations powered by Framer Motion
+-  ** Dynamic Backgrounds ** : Background adapts to the currently selected movie
 
 
 ### How to Use
@@ -33,7 +33,11 @@
 - Use the bottom tab bar to switch between Browse, Liked, and Disliked movie views
 - View and manage your movie preferences in the respective tabs
 
+##### Progress
 ![sketch](/public/IMG_4319.jpg)
-![sketch](/public/screenshot-0425.png)
-![sketch](/public/test-on-devices.gif)
-![sketch](/public/testing-in-chrome.gif)
+![sketch w thought on IPAD](/public/structure.jpg)
+
+
+![Testing on responsive app](/public/screenshot-0425.png)
+![Testing on my devices](/public/test-on-devices.gif)
+![Test on chrome](/public/testing-in-chrome.gif)
