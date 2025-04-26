@@ -36,4 +36,4 @@
 ![sketch](/public/IMG_4319.jpg)
 ![sketch](/public/screenshot-0425.png)
 ![sketch](/public/test-on-devices.gif)
-![sketch](/public/testing in chrome.gif)
+![sketch](/public/testing_in_chrome.gif)
