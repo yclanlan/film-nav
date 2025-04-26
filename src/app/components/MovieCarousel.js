@@ -45,8 +45,15 @@ export default function MovieCarousel() {
     const getCardStyle = (index) => {
         const diff = index - centerIndex;
 
+        // ++ I tried to use the length of the movies array to calculate the angle at first, but also talk to claude ai whether there is other simpler way to do this, and it suggested using a fixed radius and angle step for the arc.
+
+        // ++ which I think is quite elegant and simple. But if the data becomes more complex, consider a more dynamic approach may be great.
+
         //Arc
         const radius = 200; // Radius of the arc
+
+        // ++ I did "angleStep = {movies.length}"" at first, and feel fixed angle step looks better.
+
         const angleStep = 15; // Angle step in degrees
         const angle = diff * angleStep; // Calculate the angle for the current card
         const angleRad=(angle * Math.PI) / 180; // Convert angle to radians
@@ -63,8 +70,8 @@ export default function MovieCarousel() {
             y: yOffset,
             z: zOffset,
             rotateY: rotationY,
-            opacity: Math.max(0.7, 1 - Math.abs(diff) * 0.15),
 
+            opacity: Math.max(0.7, 1 - Math.abs(diff) * 0.15),
             zIndex:10-Math.abs(diff), 
             // Adjust zIndex based on the difference from the center index
         }
@@ -104,6 +111,11 @@ export default function MovieCarousel() {
 
 
     // Handle movie like/dislike
+    // ++ First, I did for loop with "if (prev[i].id === movie.id)" to check if the movie is already in the liked or disliked list
+    // ++ ask claude ai, which array methods will be great in this context.
+    // ++ so that I check "find" and "some" methods. 
+    // ++ find return true/false, while some return the first element that matches the condition. so in this context, I think "some" is more suitable. ( to know whether the movie is already in the list or not )
+
     const handleLikeDislike = (movie, isLike) => {
         if (isLike) {
         setLikedMovies(prev => {
@@ -142,6 +154,7 @@ export default function MovieCarousel() {
         const diff = startX - currentX;
 
         // console.log( "Diff:", diff);
+
         // If the user has moved their finger more than 10px, consider it a swipe
         if (Math.abs(diff) > 10) {
             
@@ -186,7 +199,7 @@ export default function MovieCarousel() {
 
     const handleDetailTouchMove = (e) => {
         if (startX === null) return;
-        
+        //++ e.touches for touch events, -> e.clientX for mouse events
         const currentX = e.touches ? e.touches[0].clientX : e.clientX;
         const diff = currentX - startX;
         
@@ -203,10 +216,13 @@ export default function MovieCarousel() {
         
         if (detailSwipeOffset > threshold) {
         // Swiped right - like
+        // ++ use "find" here! return the element that matches the condition
         // Find the selected movie in movies array based on it's selectedId
         const selectedMovie = movies.find(m => m.id === selectedId);
         handleLikeDislike(selectedMovie, true);
-        } else if (detailSwipeOffset < -threshold) {
+        } 
+        else if 
+        (detailSwipeOffset < -threshold) {
         // Swiped left - dislike
         const selectedMovie = movies.find(m => m.id === selectedId);
         handleLikeDislike(selectedMovie, false);
@@ -252,6 +268,9 @@ export default function MovieCarousel() {
 
 return(
     // wrapper
+
+    // ++ tailwind css helped by Tailwind CSS IntelliSense (plugin for VSCode)
+    
 <div className=" relative w-full h-dvh py-4 px-0 flex flex-col content-evenly justify-between items-center">
 
         {/* Background poster */}

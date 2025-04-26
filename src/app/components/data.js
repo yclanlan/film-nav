@@ -1,4 +1,4 @@
-// ask claudie to generate a list of movies with their details
+// ask claude to generate a list of movies with their details
 
 // search images on google (most in IMDB, but also get some directly from google images)
 
