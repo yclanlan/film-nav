@@ -16,7 +16,7 @@
 
 #### **Interactive 3D Carousel**: 
 
-- Browse movies in a visually appealing arc layout
+- Browse movies in a visually appealing arc layout (z-index with scale + perspective)
 
 
 #### **Gesture Controls**:
@@ -27,11 +27,6 @@
 #### **Like/Dislike System**:
 
 - Swipe on movie details to like or dislike movies
-
-
-#### **Organized Views**:
-
-- Separate tabs for browsing, liked movies, and disliked movies
 
 
 #### **Responsive Design**:
@@ -55,7 +50,7 @@
 - Swipe left or right to navigate through the movie carousel
 - Tap on the centered movie to view details
 
-#### From the details view:
+#### Details view:
 
 - Swipe right to like a movie
 - Swipe left to dislike a movie
