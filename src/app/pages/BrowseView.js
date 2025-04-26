@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import BrowseMovieCard from "../components/BrowseMovieCard"
-import MovieDetail from "../components/MovieDetail";
+import MovieDetail from "../components/MovieDetailCard";
 
 export default function BrowseView({
     movies,
@@ -25,7 +25,6 @@ export default function BrowseView({
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
-
 
     getCardStyle,
     likedMovies,
@@ -86,6 +85,12 @@ export default function BrowseView({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={(e) => {
+                  
+                  // ++ I did a back ( <- ) button fisrt, and thought that we usually can leave card from clicking outside, so I asked what makes this happen to claude
+                  // ++ answer: click inside will be seen as click on the element inside! so if clicked target === this whole div (the wrpper of contents), it means that you are not clicking on any content/element in the card.
+
+                  console.log(e.target);
+                  // ++ the reason why I need to see the "e.target"
                   if (e.target === e.currentTarget) {
                     handleBack();
                   }
@@ -112,6 +117,9 @@ export default function BrowseView({
                   {swipeDirection === 'right' && detailSwipeOffset > 50 && (
                     <motion.div 
                       className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                      // ++ most of animation learned on this page
+                      // ++ https://motion.dev/docs/react-animation
+
                       initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
                       animate={{ opacity: 0.9, scale: 1, rotate: 12 }}
                       exit={{ opacity: 0, scale: 0.8 }}

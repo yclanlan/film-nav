@@ -15,6 +15,7 @@ export default function LikedMovieView({
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.4 }}
             style={{maskImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 2%)' }}
+            // ++ cool way I found it worked on stackoverflow
             >
             {/* Liked Movies -TITLE */}
             <h2 className="sticky top-0 text-2xl font-bold mt-0 mb-6 py-6 px-4 text-green-400 bg-gray-500/40 backdrop-blur-lg mix-blend-screen" 
